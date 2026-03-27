@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Check for Duplicate Issues
-        uses: actions-cool/issues-similarity-analysis@v1
+        uses: actions-cool/issues-similarity-analysis@0a5ea211e6a178915f0f754968fc94ff845bcb41 # v1.3.2
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           filter-threshold: 0.65
