@@ -1,0 +1,28 @@
+name: Duplicate Issue Detector
+
+on:
+  issues:
+    types: [opened, edited]
+
+jobs:
+  duplicate-issues:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+
+    steps:
+      - name: Check for Duplicate Issues
+        uses: actions-cool/issues-similarity-analysis@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          filter-threshold: 0.65
+          title-excludes: 'bug, enhancement, feature request, feature, request, help, question'
+          comment-title: '### 🤖 Potential Duplicate Issues Detected'
+          comment-body: |
+            We noticed this issue might be a duplicate of an existing one. 
+            Please review the issues listed above before proceeding.
+            If it is a duplicate, consider closing this issue and contributing 
+            to the original instead. 
+            > _This is an automated suggestion — maintainers will make the final call._
+          since-days: 365
+          labels: 'duplicate'
